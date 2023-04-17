@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFirstApproach_LNE", "CodeFirstApproach_LNE\CodeFirstApproach_LNE.csproj", "{2110D7BA-AF20-478A-9D9E-0FC53CED6FAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2110D7BA-AF20-478A-9D9E-0FC53CED6FAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2110D7BA-AF20-478A-9D9E-0FC53CED6FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2110D7BA-AF20-478A-9D9E-0FC53CED6FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2110D7BA-AF20-478A-9D9E-0FC53CED6FAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A087D60-2173-497B-A4A5-B48E76DEDB41}
+	EndGlobalSection
+EndGlobal
