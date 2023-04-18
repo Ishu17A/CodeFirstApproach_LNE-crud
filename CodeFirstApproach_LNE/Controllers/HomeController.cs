@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CodeFirstApproach_LNE.Models;
 using System.Data.Entity;
+using PagedList.Mvc;
+using PagedList;
+using System.Web.UI.WebControls.Expressions;
 
 namespace CodeFirstApproach_LNE.Controllers
 {
@@ -14,10 +16,11 @@ namespace CodeFirstApproach_LNE.Controllers
         StudentContext db = new StudentContext();
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string search, int? i)
         {
-            var data = db.Students.ToList();
-            return View(data);
+            List<Student> stu = db.Students.ToList();
+            var str = db.Students.Where(x => x.Name.StartsWith(search) || x.Gender.StartsWith(search)  || search == null ).ToList().ToPagedList(i ?? 1, 3);
+            return View(str);
         }
 
         public ActionResult Create()
@@ -45,7 +48,7 @@ namespace CodeFirstApproach_LNE.Controllers
                     TempData["InsertMessage"] = "Data Inserted !!";
 
                     return RedirectToAction("Index");
-         /*           ModelState.Clear();*/
+                    /*           ModelState.Clear();*/
 
                 }
                 else
@@ -57,9 +60,9 @@ namespace CodeFirstApproach_LNE.Controllers
             return View();
         }
 
-        public  ActionResult Edit(int Id)
+        public ActionResult Edit(int Id)
         {
-            var row = db.Students.Where (x => x.Id == Id).FirstOrDefault();
+            var row = db.Students.Where(x => x.Id == Id).FirstOrDefault();
             return View(row);
         }
 
@@ -98,7 +101,7 @@ namespace CodeFirstApproach_LNE.Controllers
         public ActionResult Delete(int Id)
         {
 
-            var studentrow = db.Students.Where(x  => x.Id == Id).FirstOrDefault();
+            var studentrow = db.Students.Where(x => x.Id == Id).FirstOrDefault();
 
             return View(studentrow);
         }
@@ -106,7 +109,7 @@ namespace CodeFirstApproach_LNE.Controllers
         public ActionResult Delete(Student student)
         {
             db.Entry(student).State = EntityState.Deleted;
-         int a =   db.SaveChanges();
+            int a = db.SaveChanges();
             if (a > 0)
             {
                 TempData["DeleteMessage"] = "<script>alert ('Data Deleted !!')</script>";
@@ -119,7 +122,7 @@ namespace CodeFirstApproach_LNE.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Details(int Id )
+        public ActionResult Details(int Id)
         {
             var DetailsById = db.Students.Where(x => x.Id == Id).FirstOrDefault();
 
