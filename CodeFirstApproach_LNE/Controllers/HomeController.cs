@@ -16,12 +16,24 @@ namespace CodeFirstApproach_LNE.Controllers
         StudentContext db = new StudentContext();
 
         // GET: Home
-        public ActionResult Index(string search, int? i)
+        public ActionResult Index(string search, int? i )
         {
-            List<Student> stu = db.Students.ToList();
-            var str = db.Students.Where(x => x.Name.StartsWith(search) || x.Gender.StartsWith(search)  || search == null ).ToList().ToPagedList(i ?? 1, 3);
+            //List<Student> stu = db.Students.ToList();
+            // var str = db.Students.Where(x => x.Name.StartsWith(search) || x.Gender.StartsWith(search)  || search == null ).ToList().ToPagedList(i ?? 1, 3);
+
+            var str = db.Students
+           .Where(x => x.Name.StartsWith(search) || x.Gender.StartsWith(search) || search == null)
+           .OrderBy(x => x.Name) 
+           .ToList()
+           .ToPagedList(i ?? 1, 3);
+
+
+
+
             return View(str);
+
         }
+
 
         public ActionResult Create()
         {

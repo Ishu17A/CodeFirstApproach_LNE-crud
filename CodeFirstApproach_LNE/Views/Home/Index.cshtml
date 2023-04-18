@@ -1,13 +1,26 @@
-﻿@model IEnumerable<CodeFirstApproach_LNE.Models.Student>
+﻿@*@model IEnumerable<CodeFirstApproach_LNE.Models.Student>*@
+
+@model IPagedList<CodeFirstApproach_LNE.Models.Student>
+@using PagedList.Mvc;
+@using PagedList;
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-@Html.Raw(TempData["DeleteMessage"])
-<p style="color : green">@(TempData["UpdateMessage"])</p>
-@*@Html.Raw(TempData["InsertMessage"])*@
+<p>
+    @using (Html.BeginForm("Index", "Home"))
+    {
+        <input type="text" name="search" placeholder="Enter Name or Gender" />
+        <input type="submit" name="submit" value="search" />
+    }
+
+</p>
+
+
+
+
+
 <p style=" color : green"> @TempData["InsertMessage"]</p>
 
 <p>
@@ -15,15 +28,18 @@
 </p>
 <table class="table">
     <tr>
-     
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Name", "Index", "Home")
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            @Html.DisplayNameFor(model => model.First().Gender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Age)
+            @Html.DisplayNameFor(model => model.First().Age)
         </th>
         <th></th>
     </tr>
@@ -31,7 +47,7 @@
     @foreach (var item in Model)
     {
         <tr>
-         
+
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -50,3 +66,5 @@
     }
 
 </table>
+
+@Html.PagedListPager(Model, i => Url.Action("Index", "Home", new { i, search = Request.QueryString["search"] }))
